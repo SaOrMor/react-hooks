@@ -42,6 +42,8 @@ const App = () => {
     <div> 
 
       <div> {loading ? "loading..." : data}</div>
+      
+      
       <button onClick={() => setJokeNum(c => c + 1)}>New Fact</button>
 
 
