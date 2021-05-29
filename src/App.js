@@ -1,15 +1,20 @@
 import React , {useState} from "react";
 import { UseForm } from "./UseForm";
-import {Hello} from "./Hello"
+import {Hello} from "./Hello";
+import {useFetch} from "./useFetch";
 
 const App = () => {
   const [count,setCount] = useState(1);
   const [count2,setCount2] = useState(5);
 
+  const [jokeNum, setJokeNum] = useState(0)
+
   const [values, handleChange] = UseForm({email: '', password: ''});
   const [showHello, setShowHello] = useState(true);
 
-  
+  const [data, loading] = useFetch(`http://numbersapi.com/${jokeNum}/trivia`);
+
+
   // React.useEffect(() => {
         
   //   console.log("render");
@@ -36,7 +41,13 @@ const App = () => {
   return (
     <div> 
 
+      <div> {loading ? "loading..." : data}</div>
+      <button onClick={() => setJokeNum(c => c + 1)}>New Fact</button>
+
+
     <button onClick={() => setShowHello((!showHello))}> Toggle Hello </button>
+
+
     {showHello && <Hello />}
 
      <button onClick={() => 
